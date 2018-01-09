@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    compile 'com.android.support:support-v4:25.1.0'
+    //    provided files('src/main/assets')
+    compile files('libs/alipaySdk-20161129.jar')
+    compile files('libs/fastjson-1.2.8.jar')
+    compile files('libs/okhttp-3.4.2.jar')
+    compile files('libs/okhttputils-2_6_2.jar')
+    compile files('libs/okio-1.11.0.jar')
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
+
+    buildTypes{
+        release{
+            minifyEnabled false
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-project.txt'
+        }
+        //
+        debug{
+            minifyEnabled false
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-project.txt'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    //
+    lintOptions{
+        abortOnError false
+    }
+
+    dexOptions {
+        incremental false
+    }
+
+}
+
+
+def SDK_NAME = "HG6kwanSDK_V1.2.0.100";
+
+//Copy类型
+task makeJar(type: Jar) {
+    //删除存在的
+    delete 'build/libs/HG6kwanSDKChannel1.2.5.100.jar'
+    from('build/intermediates/bundles/release/')
+
+    into('build/libs/')
+    include('classes.jar')
+    include('assets/')
+    include('libs/alipaySdk-20161129.jar')
+    include('libs/fastjson-1.2.8.jar')
+    include('libs/okhttp-3.4.2.jar')
+    include('libs/okhttputils-2_6_2.jar')
+    include('libs/okio-1.11.0.jar')
+    rename ('classes.jar', 'HG6kwanSDKChannel1.2.5.100.jar')
+}
+
+makeJar.dependsOn(build)

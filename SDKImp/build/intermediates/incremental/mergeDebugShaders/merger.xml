@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\roman\AndroidStudioProjects\project\Channel_SDK1.2.3\Channel_SDK1.2.3\SDKImp\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\roman\AndroidStudioProjects\project\Channel_SDK1.2.3\Channel_SDK1.2.3\SDKImp\build-types\debug\shaders"/></dataSet></merger>
